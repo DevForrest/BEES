@@ -36,7 +36,9 @@ public class Apiary {
      */
     public String getHives() {
         String temp = "";
+        System.out.println("here 1");
         for (int i = 0; i < this.beehives.size(); i++) {
+            System.out.println("here 2");
             temp += this.beehives.get(i) + " ";
         }
         return temp;
