@@ -18,9 +18,13 @@ public class FoodieDecorator extends BeeDecorator {
     public void spawn() {
         super.spawn();
         System.out.println("Adding features of Foodie. ");
+        this.setFoodieStats();
     }
     
     private void setFoodieStats() {
+        //this.setCollection(10);
         System.out.println("Food gathering stats increased. ");
+       // this.isFoodie = true;
     }
+    
 }

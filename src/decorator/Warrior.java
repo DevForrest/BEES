@@ -12,6 +12,7 @@ public class Warrior extends BeeImpl {
 
     @Override
     public void spawn() {
+        this.isWarrior = true;
         System.out.print("Warrior created. ");
     }
 }

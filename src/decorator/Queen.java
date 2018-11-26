@@ -13,5 +13,6 @@ public class Queen extends BeeImpl {
     @Override
     public void spawn() {
         System.out.print("Queen created. ");
+        this.isQueen = true;
     }
 }
