@@ -1,13 +1,16 @@
 package singleton;
 
+import java.util.LinkedList;
+
 public class Apiary {
 
     // single accessible instance
     private static Apiary apiaryInstance;
+    LinkedList<String> beehives;
 
     // private constructor
     private Apiary() {
-
+        beehives = new LinkedList<String>();
     }
 
     /**
@@ -23,6 +26,23 @@ public class Apiary {
 
     // display method
     public void displayApiary() {
-        System.out.println("Print apiary singleton values");
+        System.out.println("Printing apiary singleton values (hives):");
+        System.out.println(this.getHives());
+    }
+
+    /**
+     * getHives returns all hive variables as a single string.
+     * @return all hives as string
+     */
+    public String getHives() {
+        String temp = "";
+        for (int i = 0; i < this.beehives.size(); i++) {
+            temp += this.beehives.get(i) + " ";
+        }
+        return temp;
+    }
+
+    public void addHive(String newHive) {
+        this.beehives.add(newHive);
     }
 }
