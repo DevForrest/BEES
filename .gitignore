@@ -19,6 +19,9 @@ local.properties
 .gradle
 /build/
 
+.gradle/4.10.2/
+.gradle/buildOutputCleanup/
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
