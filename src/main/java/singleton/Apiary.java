@@ -35,13 +35,12 @@ public class Apiary {
      * @return all hives as string
      */
     public String getHives() {
-        String temp = "";
-        System.out.println("here 1");
-        for (int i = 0; i < this.beehives.size(); i++) {
-            System.out.println("here 2");
-            temp += this.beehives.get(i) + " ";
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < beehives.size(); ++i) {
+            buf.append(this.beehives.get(i) + " ");
         }
-        return temp;
+        String s = buf.toString();
+        return s;
     }
 
     public void addHive(String newHive) {
