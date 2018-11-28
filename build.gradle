@@ -29,6 +29,7 @@ buildscript {
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java'
+    id 'eclipse'
     id 'application'
     id 'java-library'
     id 'checkstyle'
@@ -73,7 +74,7 @@ apply plugin: 'application'
 apply plugin: 'org.junit.platform.gradle.plugin'
 //apply plugin: 'jacoco'
  
-mainClassName = "main.java.Main"
+mainClassName = "main/java/Main"
 
 // checkstyle {
 //     toolVersion '7.8.1'
@@ -197,5 +198,35 @@ checkstyle {
      html.enabled = true
    }
  }
+ 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = '1.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        // attributes 'Implementation-Title': 'Gradle Jar File Example',  
+        attributes 'Implementation-Title': 'BeesJar',  
+        	'Implementation-Version': version,
+        	'Main-Class': 'main/java/Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+//Get dependencies from Maven central repository
+repositories {
+    mavenCentral()
+}
+
+//Project dependencies
+dependencies {
+	compile 'ch.qos.logback:logback-classic:1.1.2'
+}
 
 
