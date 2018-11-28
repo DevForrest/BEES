@@ -1,5 +1,11 @@
 package decorator;
 
+/**
+ * BuilderDecorator is a decorator for bees that adds builder perks.
+ * @author Devin
+ *
+ */
+
 public class BuilderDecorator extends BeeDecorator {
 
     BeeImpl bee;

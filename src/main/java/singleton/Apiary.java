@@ -2,6 +2,11 @@ package singleton;
 
 import java.util.LinkedList;
 
+/**
+ * Apiary is a collection of beehives, only one allowed to exist.
+ * @author Devin
+ *
+ */
 public class Apiary {
 
     // single accessible instance

@@ -36,6 +36,10 @@ plugins {
     id "com.github.spotbugs" version "1.6.5"
 }
 
+apply plugin: 'application'
+
+mainClassName = "main.java.main.Main"
+
 //mainClassName = 'main.java.Main'
 
 repositories {
@@ -74,7 +78,7 @@ apply plugin: 'application'
 apply plugin: 'org.junit.platform.gradle.plugin'
 //apply plugin: 'jacoco'
  
-mainClassName = "main/java/Main"
+
 
 // checkstyle {
 //     toolVersion '7.8.1'
@@ -87,6 +91,9 @@ mainClassName = "main/java/Main"
 //     source ='src/test/java'
 // }
 
+//application {
+//    mainClassName = "main.java.Main"
+//}
 
 
 junitPlatform {
@@ -212,7 +219,7 @@ task fatJar(type: Jar) {
         // attributes 'Implementation-Title': 'Gradle Jar File Example',  
         attributes 'Implementation-Title': 'BeesJar',  
         	'Implementation-Version': version,
-        	'Main-Class': 'main/java/Main'
+        	'Main-Class': 'main/java/main/Main'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -229,4 +236,63 @@ dependencies {
 	compile 'ch.qos.logback:logback-classic:1.1.2'
 }
 
+
+
+
+apply plugin: 'jacoco'
+
+afterEvaluate {
+    def junitPlatformTestTask = (JavaExec) project.tasks.getByName('junitPlatformTest')
+
+    jacoco {
+        applyTo(junitPlatformTestTask)
+    }
+
+    project.task(type: JacocoReport, "jacocoJupTestReport") {
+        executionData(junitPlatformTestTask)
+        sourceSets(sourceSets.main)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+        classDirectories = files(sourceSets.main.output)
+
+        reports {
+            xml.enabled true
+            xml.destination file("${buildDir}/jacoco/report.xml")
+            html.enabled true
+            html.destination file("${buildDir}/jacoco/html")
+        }
+    }
+
+    check.dependsOn jacocoJupTestReport
+}
+configurations {
+    junitXmlToHtml
+}
+
+task generateHtmlTestReports << {
+    def reportsDir = new File(buildDir, 'test-reports')
+    reportsDir.mkdirs()
+
+    ant.taskdef(
+        name: 'junitReport',
+        classname: 'org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator',
+        classpath: configurations.junitXmlToHtml.asPath
+    )
+
+    ant.junitReport(todir: "$buildDir/test-results/junit-platform", tofile: "aggregated-test-results.xml") {
+        fileset(dir: "$buildDir/test-results/junit-platform")
+        report(format: 'frames', todir: reportsDir)
+    }
+}
+
+afterEvaluate {
+    def junitPlatformTestTask = tasks.getByName('junitPlatformTest')
+    generateHtmlTestReports.dependsOn(junitPlatformTestTask)
+    check.dependsOn(generateHtmlTestReports)
+}
+
+dependencies {
+    // configure as normal ...
+
+    junitXmlToHtml 'org.apache.ant:ant-junit:1.9.7'
+}
 

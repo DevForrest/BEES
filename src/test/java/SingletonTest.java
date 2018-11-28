@@ -53,13 +53,12 @@ public class SingletonTest {
      */
     @Test
     public void singletonTest() {
+        apiary = null;
         apiary = Apiary.getApiary();
         Apiary apiary2 = Apiary.getApiary();
         String hives = apiary2.getHives();
-        if (hives != "") {
-            apiary.addHive("hive1");
-            apiary.addHive("hive2");
-        }
+        apiary.addHive("hive1");
+        apiary.addHive("hive2");
         hives = apiary.getHives();
         assertEquals("Apiary not singleton", "hive1 hive2 ", hives);
     }
