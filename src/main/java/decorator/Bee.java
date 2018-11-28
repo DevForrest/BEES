@@ -1,7 +1,7 @@
 package decorator;
 
 public interface Bee {
-
+    
     //    int attack = 3;
     //    int collectionTime = 3;
     //    int buildTime = 50;

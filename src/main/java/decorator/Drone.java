@@ -13,5 +13,6 @@ public class Drone extends BeeImpl {
     @Override
     public void spawn() {
         System.out.print("Drone created. ");
+        this.isDrone = true;
     }
 }

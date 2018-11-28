@@ -19,6 +19,7 @@ public class SingletonTest {
 
     @After
     public void tearDown() throws Exception {
+        apiary = null;
     }
 
     /**
@@ -26,42 +27,42 @@ public class SingletonTest {
      */
     @Test
     public void constructorTest() {
-        System.out.println("here a");
         apiary = Apiary.getApiary();
         String hives = apiary.getHives();
-        System.out.println(hives); ////////////////d
-        // expected, actual, message
-        //assertEquals(null, hives, "New apiary contains hives already"); ////////////////a
-        assertEquals("", "", "failed true test"); ///////////////d
+        // System.out.println(hives);
+        // message, expected, actual
+        assertEquals("New apiary contains hives already", "", hives);
     }
-    
+
     /**
      * Tests addBeehive method.
      */
     @Test
     public void addHiveTest() {
-        System.out.println("here b");
+        apiary = Apiary.getApiary();
         apiary.addHive("hive1");
         apiary.addHive("hive2");
         String[] hives = apiary.getHives().split(" ");
-        System.out.println(hives[0] + ", " + hives[1]); //////////////////d
-        //assertEquals("hive1", hives[0], "hive1 not found"); ///////////////////a
-        //assertEquals("hive2", hives[1], "hive2 not found"); ///////////////a
-        assertEquals("", "", "failed true test"); //////////////////d
+        // System.out.println(hives[0] + ", " + hives[1]);
+        assertEquals("hive1 not found", "hive1", hives[0]);
+        assertEquals("hive2 not found", "hive2", hives[1]);
     }
-    
+
     /**
      * Tests Apiary class acts as a singleton.
      */
     @Test
     public void singletonTest() {
-        System.out.println("here c");
+        apiary = Apiary.getApiary();
         Apiary apiary2 = Apiary.getApiary();
         String hives = apiary2.getHives();
-        System.out.println(hives); /////////////d
-        //assertEquals("hive1 hive2 ", hives, "Apiary not singleton"); ///////////////a
-        assertEquals("", "", "failed true test"); ///////////////d
+        if (hives != "") {
+            apiary.addHive("hive1");
+            apiary.addHive("hive2");
+        }
+        hives = apiary.getHives();
+        assertEquals("Apiary not singleton", "hive1 hive2 ", hives);
     }
 
-    
+
 }

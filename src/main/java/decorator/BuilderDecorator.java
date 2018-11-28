@@ -6,13 +6,11 @@ public class BuilderDecorator extends BeeDecorator {
 
     public BuilderDecorator(Bee b) {
         super(b);
-
     }
 
     @Override
     public void spawn() {
         super.spawn();
-        System.out.println("Building stats increased. ");
-        //  this.bee.attack += 2;
+        System.out.println("Building stats of a builder.");
     }
 }
