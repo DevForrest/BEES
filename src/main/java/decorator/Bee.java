@@ -1,7 +1,7 @@
 package decorator;
 
 public interface Bee {
-    
+
     //    int attack = 3;
     //    int collectionTime = 3;
     //    int buildTime = 50;
@@ -15,9 +15,17 @@ public interface Bee {
     //    boolean isBuilder = false;
 
 
-    public void spawn(); // {
+    //    public void spawn(); // {
     //   System.out.print("Bee created. ");
     //}
+
+    public String getDescription();
+
+    public boolean isFoodie();
+
+    public boolean isBuilder();
+
+    public String getName();
 
     // void setCollection(int coll);
     //protected void setCollection();//int collection) {

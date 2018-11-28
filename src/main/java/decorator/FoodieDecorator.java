@@ -8,16 +8,41 @@ package decorator;
 
 public class FoodieDecorator extends BeeDecorator {
 
-    //protected Bee bee;
+    protected BeeImpl bee;
 
-    public FoodieDecorator(Bee b) {
-        super(b);
+    public FoodieDecorator(BeeImpl b) {
+        this.bee = b;
+        this.bee.isFoodie = true;
     }
 
     @Override
-    public void spawn() {
-        super.spawn();
-        System.out.println("Food gathering stats of a foodie.");
+    public String getDescription() {
+        return bee.getDescription() + ", foodie";
     }
+
+    @Override
+    public boolean isFoodie() {
+        return this.bee.isFoodie();
+    }
+
+    @Override
+    public boolean isBuilder() {
+        return this.bee.isBuilder();
+    }
+
+    @Override
+    public String getName() {
+        return this.bee.getName();
+    }
+
+    public BeeImpl getBee() {
+        return this.bee;
+    }
+
+    //    @Override
+    //    public void spawn() {
+    //        super.spawn();
+    //        System.out.println("Food gathering stats of a foodie.");
+    //    }
 
 }
