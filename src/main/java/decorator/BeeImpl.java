@@ -1,7 +1,13 @@
 package decorator;
 
+/**
+ * Bee implementation class.
+ * @author Devin
+ *
+ */
 public class BeeImpl implements Bee {
 
+    // originally had much more functionality planned for the extra credit
     protected String description = "bee";
     protected String name = "Bee";
     //    protected int attack = 3;
@@ -78,20 +84,10 @@ public class BeeImpl implements Bee {
      * @return new description of winner
      */
     public String kill(BuilderDecorator deadBee) {
-        //BeeImpl killed = deadBee.getBee();
         Bee beeVictor;
         String output = this.getName() + " killed " + deadBee.getName() + " and recieved the ";
-        //if (deadBee.isFoodie()) {
-        //    output += "foodie ";
-        //     this.isFoodie = true;
-        //     beeVictor = new FoodieDecorator(this);
-        //} else if (deadBee.isBuilder()) {
         output += "builder ";
-        //this.isBuilder = true;
         beeVictor = new BuilderDecorator(this);
-        //} else {
-        //    beeVictor = this;
-        // }
         output += "perk!";
         System.out.println(output);
         return beeVictor.getDescription();
@@ -103,23 +99,12 @@ public class BeeImpl implements Bee {
      * @return new description of winner
      */
     public String kill(FoodieDecorator deadBee) {
-        //BeeImpl killed = deadBee.getBee();
         Bee beeVictor;
         String output = this.getName() + " killed " + deadBee.getName() + " and recieved the ";
-        // if (deadBee.isFoodie()) {
         output += "foodie ";
-        //this.isFoodie = true;
         beeVictor = new FoodieDecorator(this);
-        //} else if (deadBee.isBuilder()) {
-        //     output += "builder ";
-        //     this.isWarrior = true;
-        //     beeVictor = new BuilderDecorator(this);
-        // } else {
-        //     beeVictor = this;
-        // }
         output += "perk!";
         System.out.println(output);
-        //return beeVictor;
         return beeVictor.getDescription();
     }
 
@@ -129,15 +114,10 @@ public class BeeImpl implements Bee {
      * @return new description of winner
      */
     public String kill(BeeImpl deadBee) {
-        //BeeImpl killed = deadBee.getBee();
-        //Bee beeVictor;
         String output = this.getName() + " killed " + deadBee.getName() + " and recieved no perks";
-        //beeVictor = this;
         System.out.println(output);
-        //return beeVictor;
         return this.getDescription();
     }
-
 
     @Override
     public String getDescription() {

@@ -1,7 +1,5 @@
 package main;
 
-import static org.junit.Assert.assertEquals;
-
 import decorator.BeeImpl;
 import decorator.BuilderDecorator;
 import decorator.FoodieDecorator;
