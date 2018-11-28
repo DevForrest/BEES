@@ -15,6 +15,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 
+
 buildscript {
     repositories {
         mavenCentral()
@@ -27,6 +28,8 @@ buildscript {
 
 plugins {
     // Apply the java-library plugin to add support for Java Library
+    id 'java'
+    id 'application'
     id 'java-library'
     id 'checkstyle'
     id "com.github.spotbugs" version "1.6.5"
@@ -38,13 +41,39 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    //api 'org.apache.commons:commons-math3:3.6.1'
+
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:23.0'
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+    
+    // in case JUnit 4 is also needed/wanted
+    compile("junit:junit:4.12")
+    //testCompile("junit:junit:4.12")
+    testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0-M4")
+
+    //testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-M4")
+    //testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-M4")
+
+    // Enable use of the JUnitPlatform Runner within the IDE
+    //testCompile("org.junit.platform:junit-platform-runner:1.0.0-M4")
+    
+   // junitXmlToHtml 'org.apache.ant:ant-junit:1.9.7'
+}
+
+sourceSets.main.java.srcDirs = ['src']
 
 
 apply plugin: 'checkstyle'
- apply plugin: 'application'
- apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'application'
+apply plugin: 'org.junit.platform.gradle.plugin'
+//apply plugin: 'jacoco'
  
- mainClassName = 'main.java.Main'
+mainClassName = "main.java.Main"
 
 // checkstyle {
 //     toolVersion '7.8.1'
@@ -57,35 +86,14 @@ apply plugin: 'checkstyle'
 //     source ='src/test/java'
 // }
 
-dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
 
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:23.0'
-
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
-    
-    // in case JUnit 4 is also needed/wanted
-    compile("junit:junit:4.12")
-    testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0-M4")
-
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-M4")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-M4")
-
-    // Enable use of the JUnitPlatform Runner within the IDE
-    testCompile("org.junit.platform:junit-platform-runner:1.0.0-M4")
-    
-   // junitXmlToHtml 'org.apache.ant:ant-junit:1.9.7'
-}
 
 junitPlatform {
     details 'tree'
 }
 
 
-//apply plugin: 'jacoco'
+
 
 //afterEvaluate {
 //    def junitPlatformTestTask = (JavaExec) project.tasks.getByName('junitPlatformTest')
@@ -177,8 +185,8 @@ checkstyle {
    //reportLevel = "high"
    
    //standard
-   effort = "max"
-   reportLevel = "medium"
+   //effort = "less"
+   //reportLevel = "medium"
    
  }
 

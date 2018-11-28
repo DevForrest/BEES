@@ -4,12 +4,12 @@ public class BeeImpl implements Bee {
     // REIMPLEMENT ///////////////////////////////////////////////a ////a ...
     protected String description = "bee";
     protected String name = "Bee";
-    protected int attack = 3;
+//    protected int attack = 3;
     //   protected int collection = 3;
-    protected int buildTime = 50;
-    protected int food = 10;
-    protected int rest = 10;
-    protected boolean isBusy = false;
+//    protected int buildTime = 50;
+//    protected int food = 10;
+//    protected int rest = 10;
+//    protected boolean isBusy = false;
     //    protected boolean isQueen = false;
     //    protected boolean isDrone = false;
     protected boolean isFoodie = false;
